@@ -1,4 +1,5 @@
-diirt.github.io
+Project website
 ===============
 
-Data integration in real-time website
+This repository contains the web pages for diirt.org
+
