@@ -77,7 +77,49 @@
         </div>
       </div>
 
-    <div class="container">
+
+    <!-- Information Blokcs -->
+    <div class="row-fluid margin-bottom-20">
+        <!-- Who We Are -->
+        <div class="span8">
+            <div id="milestone" class="headline"><h2>Dashboard</h2></div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Task name</th>
+                  <th>Assignee</th>
+                  <th>Priority</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody id="milestone_issues">
+              </tbody>
+            </table>
+            <h3>Ongoing projects</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Task name</th>
+                  <th>Assignee</th>
+                  <th>Priority</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody id="project_issues">
+              </tbody>
+            </table>
+            <br>
+	    <div id="buildstatus" class="headline"><h3>Build Status</h3></div>
+        </div><!--/span8-->
+
+        <!-- Latest Commits -->
+        <div class="span4">
+            <div id="commits" class="blog-twitter">
+                <div class="headline"><h3>Latest Commits</h3></div>
+            </div>
+        </div><!--/span4-->
+    </div><!--/row-fluid-->
+    
 
 
     <!-- Bootstrap core JavaScript
@@ -86,5 +128,145 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="dist/js/bootstrap.js"></script>
   
+<!-- JS Global Compulsory -->           
+<script type="text/javascript" src="assets/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="assets/js/modernizr.custom.js"></script>        
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+<!-- JS Implementing Plugins -->           
+<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+<!-- JS Page Level -->           
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/date.js"></script>
+<script type="text/javascript" src="assets/js/jquery.timeago.js" ></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        App.init();
+        App.initSliders();
+
+//        $.getJSON('https://api.github.com/orgs/ControlSystemStudio/members', function(data) {
+//            var items = [];
+//
+//            $.each(data, function(key, val) {
+//                items.push('<li class="gitub">'+
+//                        '<a href="'+val.html_url+'">'+
+//                        '<img src="'+val.avatar_url+'" alt="'+val.login+'" />'+
+//                        '<img src="'+val.avatar_url+'" class="color-img" alt="'+val.login+'" />'+
+//                        '</a>'+
+//                        '</li>');
+//            });
+//
+//            $(items.join('')).appendTo('#collaborationList');
+//
+//
+//        });
+
+        $.getJSON('https://api.github.com/repos/diirt/diirt/milestones', function(data) {
+
+            $.each(data, function(key, val) {
+                var d = new Date(val.due_on);
+                $(
+                        '<h3>Current milestone: <a href="https://github.com/diirt/diirt/issues?milestone='+val.number+'">'+val.title+'</a></h3><p>'+
+                                ' '+val.open_issues+' open issues - '+
+                                ' '+val.closed_issues+' closed issues - '+
+                                'due on: '+ d.toString()+'</p>').appendTo('#milestone');
+                        
+                
+                // Query the closed issues
+                $.getJSON('https://api.github.com/repos/diirt/diirt/issues?state=closed&milestone=' + val.number, function(data) {
+                    var issues = [];
+                    $.each(data, function(key, val) {
+                        issues.push(
+                                 '<tr>'+
+                                 '<td><a href="'+val.html_url+'">'+val.title+'</a></td>'+
+                                 '<td>'+val.assignee+'</td>'+
+                                 '<td> </td>'+
+                                 '<td>'+val.state+'</td>'+
+                                 '</tr>');
+                                 });
+                    $(issues.join('')).appendTo('#milestone_issues');
+                });
+                
+                // Query the open issues
+                $.getJSON('https://api.github.com/repos/diirt/diirt/issues?milestone=' + val.number, function(data) {
+                    var issues = [];
+                    $.each(data, function(key, val) {
+                        issues.push(
+                                 '<tr>'+
+                                 '<td><a href="'+val.html_url+'">'+val.title+'</a></td>'+
+                                 '<td>'+val.assignee+'</td>'+
+                                 '<td> </td>'+
+                                 '<td>'+val.state+'</td>'+
+                                 '</tr>');
+                                 });
+                    $(issues.join('')).appendTo('#milestone_issues');
+                });
+            });
+
+        });
+
+        // Query the ongoing projects
+        $.getJSON('https://api.github.com/repos/diirt/diirt/issues?labels=ongoing', function(data) {
+
+                var issues = [];
+                $.each(data, function(key, val) {
+                    issues.push(
+                             '<tr>'+
+                             '<td><a href="'+val.html_url+'">'+val.title+'</a></td>'+
+                             '<td>'+val.assignee+'</td>'+
+                             '<td> </td>'+
+                             '<td>'+val.state+'</td>'+
+                             '</tr>');
+                             });
+                $(issues.join('')).appendTo('#project_issues');
+
+        });
+
+        $.getJSON('https://api.github.com/repos/ControlSystemStudio/cs-studio/commits?sha=3.2.x&since='+(new Date().last().day()).toISOString(), function(data) {
+            var items = [];
+
+            $.each(data, function(key, val) {
+                try{
+                    items.push(
+                            '<p><a href="'+val.committer.html_url+'">@'+val.commit.committer.name+'  </a>'+
+                                    val.commit.message+'  '+'<a href="'+val.html_url+'"><i class="icon-external-link"></i></a>'+
+                                    '<span>'+$.timeago(val.commit.committer.date)+'</span></p>');
+                } catch(e) {
+                    // need for non public github users
+                    items.push(
+                            '<p><a href="#">@'+val.commit.committer.name+'  </a>'+
+                                    val.commit.message+'  '+'<a href="'+val.html_url+'"><i class="icon-external-link"></i></a>'+
+                                    '<span>'+$.timeago(val.commit.committer.date)+'</span></p>');
+                };
+            });
+
+            $(items.join('')).appendTo('#commits');
+        });
+
+        $.getJSON('https://openepics.ci.cloudbees.com/view/CS-Studio/api/json?jsonp=?', function(data) {
+            var items = [];
+
+            $.each(data.jobs, function(key, val) {
+                var s = '<li><i class="';
+                switch(val.color){
+                    case "blue":
+                        s = s + 'icon-smile color-green';
+                        break;
+                    case "red":
+                        s = s + 'icon-frown color-red';
+                        break;
+                    default:
+                        s = s + 'icon-meh color-grey';
+                        break
+                }
+                items.push(s +'"></i><a href="'+val.url+'">  '+val.name+'</a></li>');
+            });
+
+            $('<ul/>', {
+                'class': 'unstyled',
+                html: items.join('')}).appendTo('#buildstatus');
+        });
+    });
+</script>
 
 </body></html>
