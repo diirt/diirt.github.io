@@ -108,16 +108,19 @@
               <tbody id="project_issues">
               </tbody>
             </table>
-            <br>
 	    <div id="buildstatus" class="headline"><h3>Build Status</h3></div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Build name</th>
+                </tr>
+              </thead>
+              <tbody id="build_tasks">
+              </tbody>
+            </table>
         </div><!--/span8-->
-
-        <!-- Latest Commits -->
-        <div class="span4">
-            <div id="commits" class="blog-twitter">
-                <div class="headline"><h3>Latest Commits</h3></div>
-            </div>
-        </div><!--/span4-->
+    </div>
     </div><!--/row-fluid-->
     
 
@@ -222,49 +225,24 @@
 
         });
 
-        $.getJSON('https://api.github.com/repos/ControlSystemStudio/cs-studio/commits?sha=3.2.x&since='+(new Date().last().day()).toISOString(), function(data) {
-            var items = [];
-
-            $.each(data, function(key, val) {
-                try{
-                    items.push(
-                            '<p><a href="'+val.committer.html_url+'">@'+val.commit.committer.name+'  </a>'+
-                                    val.commit.message+'  '+'<a href="'+val.html_url+'"><i class="icon-external-link"></i></a>'+
-                                    '<span>'+$.timeago(val.commit.committer.date)+'</span></p>');
-                } catch(e) {
-                    // need for non public github users
-                    items.push(
-                            '<p><a href="#">@'+val.commit.committer.name+'  </a>'+
-                                    val.commit.message+'  '+'<a href="'+val.html_url+'"><i class="icon-external-link"></i></a>'+
-                                    '<span>'+$.timeago(val.commit.committer.date)+'</span></p>');
-                };
-            });
-
-            $(items.join('')).appendTo('#commits');
-        });
-
-        $.getJSON('https://openepics.ci.cloudbees.com/view/CS-Studio/api/json?jsonp=?', function(data) {
+        $.getJSON('https://openepics.ci.cloudbees.com/view/Diirt/api/json?jsonp=?', function(data) {
             var items = [];
 
             $.each(data.jobs, function(key, val) {
-                var s = '<li><i class="';
+                var s = '<tr>';
                 switch(val.color){
                     case "blue":
-                        s = s + 'icon-smile color-green';
-                        break;
-                    case "red":
-                        s = s + 'icon-frown color-red';
+                        s = s + '<td><span class="glyphicon glyphicon-ok"></span></td>';
                         break;
                     default:
-                        s = s + 'icon-meh color-grey';
+                        s = s + '<td><span class="glyphicon glyphicon-remove"></span></td>';
                         break
                 }
-                items.push(s +'"></i><a href="'+val.url+'">  '+val.name+'</a></li>');
+                items.push(s +'"<td><a href="'+val.url+'">  '+val.name+'</td>' +
+                        '</tr>');
             });
 
-            $('<ul/>', {
-                'class': 'unstyled',
-                html: items.join('')}).appendTo('#buildstatus');
+            $(items.join('')).appendTo('#build_tasks');
         });
     });
 </script>
