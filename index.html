@@ -92,46 +92,60 @@
             <div class="row">
                 <!-- Dashboard (issues) -->
                 <div class="col-lg-8">
-                    <div id="milestone"></div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Task name</th>
-                                <th>Assignee</th>
-                                <th>Priority</th>
-                                <th>State</th>
-                            </tr>
-                        </thead>
-                        <tbody id="milestone_issues">
-                        </tbody>
-                    </table>
-                    <h3>Ongoing projects</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Task name</th>
-                                <th>Assignee</th>
-                                <th>Priority</th>
-                                <th>State</th>
-                            </tr>
-                        </thead>
-                        <tbody id="project_issues">
-                        </tbody>
-                    </table>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Issues/Tasks</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="milestone"></div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Task name</th>
+                                        <th>Assignee</th>
+                                        <th>Priority</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="milestone_issues">
+                                </tbody>
+                            </table>
+                            <hr>
+                            <h3>Ongoing projects</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Task name</th>
+                                        <th>Assignee</th>
+                                        <th>Priority</th>
+                                        <th>State</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="project_issues">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                <!-- Build status -->
                 <div class="col-sm-4">
-                    <!-- Dashboard (issues) -->
-                    <div id="buildstatus"><h3>Build Status</h3></div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Build name</th>
-                            </tr>
-                        </thead>
-                        <tbody id="build_tasks">
-                        </tbody>
-                    </table>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Build Status</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Build name</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="build_tasks">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
