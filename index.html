@@ -159,6 +159,25 @@
         <script src="js/libs/twitter-bootstrap/js/bootstrap.js"></script>
 
         <script type="text/javascript">
+            function formatIssues(jsonIssues) {
+                var htmlIssues = [];
+                $.each(jsonIssues, function(key, val) {
+                    var issue = '<tr>' +
+                            '<td><a href="' + val.html_url + '">' + val.title + '</a></td>';
+                    if (val.assignee) {
+                        issue += '<td>' + val.assignee.login + '</td>';
+                    } else {
+                        issue += '<td>None</td>';
+                    }
+                    htmlIssues.push(
+                            issue +
+                            '<td> </td>' +
+                            '<td>' + val.state + '</td>' +
+                            '</tr>');
+                });
+                return htmlIssues;
+            };
+    
             jQuery(document).ready(function() {
 
                 // Query open milestone
@@ -176,31 +195,13 @@
 
                         // Query the closed issues of the current milestone
                         $.getJSON('https://api.github.com/repos/diirt/diirt/issues?state=closed&milestone=' + val.number, function(data) {
-                            var issues = [];
-                            $.each(data, function(key, val) {
-                                issues.push(
-                                        '<tr>' +
-                                        '<td><a href="' + val.html_url + '">' + val.title + '</a></td>' +
-                                        '<td>' + val.assignee + '</td>' +
-                                        '<td> </td>' +
-                                        '<td>' + val.state + '</td>' +
-                                        '</tr>');
-                            });
+                            var issues = formatIssues(data);
                             $(issues.join('')).appendTo('#milestone_issues');
                         });
 
                         // Query the open issues of the current milestone
                         $.getJSON('https://api.github.com/repos/diirt/diirt/issues?milestone=' + val.number, function(data) {
-                            var issues = [];
-                            $.each(data, function(key, val) {
-                                issues.push(
-                                        '<tr>' +
-                                        '<td><a href="' + val.html_url + '">' + val.title + '</a></td>' +
-                                        '<td>' + val.assignee + '</td>' +
-                                        '<td> </td>' +
-                                        '<td>' + val.state + '</td>' +
-                                        '</tr>');
-                            });
+                            var issues = formatIssues(data);
                             $(issues.join('')).appendTo('#milestone_issues');
                         });
                     });
@@ -209,19 +210,8 @@
 
                 // Query the ongoing projects
                 $.getJSON('https://api.github.com/repos/diirt/diirt/issues?labels=ongoing', function(data) {
-
-                    var issues = [];
-                    $.each(data, function(key, val) {
-                        issues.push(
-                                '<tr>' +
-                                '<td><a href="' + val.html_url + '">' + val.title + '</a></td>' +
-                                '<td>' + val.assignee + '</td>' +
-                                '<td> </td>' +
-                                '<td>' + val.state + '</td>' +
-                                '</tr>');
-                    });
+                    var issues = formatIssues(data);
                     $(issues.join('')).appendTo('#project_issues');
-
                 });
 
                 // Query the Jenkins jobs
