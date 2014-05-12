@@ -92,43 +92,7 @@
             </div>
             <div class="row">
                 <!-- Dashboard (issues) -->
-                <div class="col-lg-8">
-                    <div class="panel panel-primary">
-                        <div id="milestone_title" class="panel-heading">
-                        </div>
-                        <div class="panel-body">
-                            <div id="milestone"></div>
-                        </div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Task name</th>
-                                    <th>Assignee</th>
-                                    <th>Priority</th>
-                                    <th>State</th>
-                                </tr>
-                            </thead>
-                            <tbody id="milestone_issues">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Ongoing projects</h3>
-                        </div>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Task name</th>
-                                    <th>Assignee</th>
-                                    <th>Priority</th>
-                                    <th>State</th>
-                                </tr>
-                            </thead>
-                            <tbody id="project_issues">
-                            </tbody>
-                        </table>
-                    </div>
+                <div id="milestones" class="col-lg-8">
                 </div>
                 <!-- Build status -->
                 <div class="col-sm-4">
@@ -158,63 +122,13 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/libs/jquery/jquery.js"></script>
         <script src="js/libs/twitter-bootstrap/js/bootstrap.js"></script>
+        <script src="githubUtil.js"></script>
 
         <script type="text/javascript">
-            function formatIssues(jsonIssues) {
-                var htmlIssues = [];
-                $.each(jsonIssues, function(key, val) {
-                    var issue = '<tr>' +
-                            '<td><a href="' + val.html_url + '">' + val.title + '</a></td>';
-                    if (val.assignee) {
-                        issue += '<td>' + val.assignee.login + '</td>';
-                    } else {
-                        issue += '<td>None</td>';
-                    }
-                    htmlIssues.push(
-                            issue +
-                            '<td> </td>' +
-                            '<td>' + val.state + '</td>' +
-                            '</tr>');
-                });
-                return htmlIssues;
-            };
-    
             jQuery(document).ready(function() {
 
-                // Query open milestone
-                $.getJSON('https://api.github.com/repos/diirt/diirt/milestones', function(data) {
-
-                    $.each(data, function(key, val) {
-                        var d = new Date(val.due_on);
-                        // Add title with current milestone
-                        $('<h3 class="panel-title">Current milestone: <a href="https://github.com/diirt/diirt/issues?milestone=' + val.number + '">' + val.title + '</a></h3>')
-                                .appendTo('#milestone_title');
-                        $(
-                                '<p>' + val.open_issues + ' open issues - ' +
-                                ' ' + val.closed_issues + ' closed issues - ' +
-                                'due on: ' + d.toString() + '</p>').appendTo('#milestone');
-
-
-                        // Query the closed issues of the current milestone
-                        $.getJSON('https://api.github.com/repos/diirt/diirt/issues?state=closed&milestone=' + val.number, function(data) {
-                            var issues = formatIssues(data);
-                            $(issues.join('')).appendTo('#milestone_issues');
-                        });
-
-                        // Query the open issues of the current milestone
-                        $.getJSON('https://api.github.com/repos/diirt/diirt/issues?milestone=' + val.number, function(data) {
-                            var issues = formatIssues(data);
-                            $(issues.join('')).appendTo('#milestone_issues');
-                        });
-                    });
-
-                });
-
-                // Query the ongoing projects
-                $.getJSON('https://api.github.com/repos/diirt/diirt/issues?labels=ongoing', function(data) {
-                    var issues = formatIssues(data);
-                    $(issues.join('')).appendTo('#project_issues');
-                });
+                githubMilestones('diirt/diirt', '#milestones');
+                githubIssueLabel('diirt/diirt', 'Ongoing projects', 'ongoing', '#milestones')
 
                 // Query the Jenkins jobs
                 $.getJSON('https://openepics.ci.cloudbees.com/view/Diirt/api/json?jsonp=?', function(data) {
