@@ -72,7 +72,8 @@ function githubMilestones(githubRepo, divId) {
 function githubIssueLabel(githubRepo, title, label, divId) {
     var tableTemplate = '<div class="panel panel-primary">\
         <div id="issues_title_' + label + '" class="panel-heading">\
-            <h3 class="panel-title">' + title + '</h3>\
+            <h3 class="panel-title"><a href="https://github.com/' + githubRepo + '/issues?labels=' + label +
+            '">' + title + '</a></h3>\
         </div>\
         <table class="table table-striped">\
             <thead>\
