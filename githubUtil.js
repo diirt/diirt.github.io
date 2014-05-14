@@ -45,7 +45,7 @@ function githubMilestones(githubRepo, divId) {
 
             var d = new Date(val.due_on);
             // Add title with current milestone
-            $('<h3 class="panel-title">Current milestone: <a href="https://github.com/' + githubRepo + '/issues?milestone=' + val.number + '">' + val.title + '</a></h3>')
+            $('<h3 class="panel-title">Milestone: <a href="https://github.com/' + githubRepo + '/issues?milestone=' + val.number + '">' + val.title + '</a></h3>')
                     .appendTo('#milestone_title_' + val.number);
             $(
                     '<p>' + val.open_issues + ' open issues - ' +
