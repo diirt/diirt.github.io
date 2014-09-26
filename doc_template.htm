@@ -15,6 +15,7 @@
 
         <!-- Custom styles for this template -->
         <link href="stylesheet.css" rel="stylesheet">
+        <link href="docs.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -51,36 +52,53 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                        <li class="active"><a href="#">Overview</a></li>
+                <nav id="toc" class="col-sm-3 col-md-2 bs-docs-sidebar">
+                    <ul id="sidebar" class="nav nav-stacked fixed">
+                        <li><a href="#title" >Title</a></li>
                         <li><a href="#introduction" >Introduction</a></li>
-                        <li><a href="#definitions">Definitions</a></li>
-                        <li><a href="#type">Type</a></li>
-                        <li><a href="#alarm">Alarm</a></li>
-                        <li><a href="#display">Display</a></li>
-                        <li><a href="#enum">Enum</a></li>
-                        <li><a href="#time">Time</a></li>
-                        <li><a href="#vnumber">VNumber</a></li>
-                        <li><a href="#vboolean">VBoolean</a></li>
-                        <li><a href="#venum">VEnum</a></li>
-                        <li><a href="#vstring">VString</a></li>
-                        <li><a href="#vnumberarray">VNumberArray</a></li>
-                        <li><a href="#vbooleanarray">VBooleanArray</a></li>
-                        <li><a href="#venumarray">VEnumArray</a></li>
-                        <li><a href="#vstringarray">VStringArray</a></li>
-                        <li><a href="#vtable">VTable</a></li>
+                        <li>
+                            <a href="#definitions">Definitions</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#type">Type</a></li>
+                                <li><a href="#alarm">Alarm</a></li>
+                                <li><a href="#display">Display</a></li>
+                                <li><a href="#enum">Enum</a></li>
+                                <li><a href="#time">Time</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#scalars">Scalars</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#vnumber">VNumber</a></li>
+                                <li><a href="#vboolean">VBoolean</a></li>
+                                <li><a href="#venum">VEnum</a></li>
+                                <li><a href="#vstring">VString</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#arrays">Arrays</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#vnumberarray">VNumberArray</a></li>
+                                <li><a href="#vbooleanarray">VBooleanArray</a></li>
+                                <li><a href="#venumarray">VEnumArray</a></li>
+                                <li><a href="#vstringarray">VStringArray</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#complex">Complex</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#vtable">VTable</a></li>
+                            </ul>
+                        </li>
                     </ul>
-                </div>
+                </nav>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <div class="head">
 
-                        <h1>JSON serialization for vTypes</h1>
+                    <h1 id="title" class="anchor">JSON serialization for vTypes</h1>
 
-                        <h2>Version 1</h2>
-                        <hr />
+                    <h2>Version 1</h2>
+                    <hr />
 
-                    </div>
 
                     <div id="contents" class="contents">
 
@@ -333,6 +351,7 @@
                                 <hr />
                             </div>
 
+                            <h2 id="scalars" class="anchor">Scalars</h2>
                             <h3 id="vnumber" class="anchor">VNumber (VDouble, VFloat, VLong, VInt, VShort, VByte)</h3>                
                             <div>
                                 <p>A scalar numeric value:</p>
@@ -574,6 +593,7 @@
                                 <hr />
                             </div>
 
+                            <h2 id="arrays" class="anchor">Array</h2>
                             <h3 id="vnumberarray" class="anchor">VNumberArray (VDoubleArray, VFloatArray, VLongArray, VIntArray, VShortArray, VByteArray)</h3>                
                             <div>
                                 <p>A numeric array value:</p>
@@ -833,6 +853,7 @@
                                 <hr />
                             </div>
 
+                            <h2 id="complex" class="anchor">Complex</h2>
                             <h3 id="vtable" class="anchor">VTable</h3>                
                             <div>
                                 <p>A table:</p>
@@ -932,6 +953,12 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/libs/jquery/jquery.js"></script>
         <script src="js/libs/twitter-bootstrap/js/bootstrap.js"></script>
+        <script>
+            $('body').scrollspy({
+                target: '.bs-docs-sidebar',
+                offset: 40
+            });
+        </script>
 
 
     </body>
