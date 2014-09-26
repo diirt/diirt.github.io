@@ -108,3 +108,8 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+.anchor {
+    padding-top: 70px;
+    margin-top: -70px;
+}
