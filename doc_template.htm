@@ -55,20 +55,21 @@
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Overview</a></li>
                         <li><a href="#introduction" >Introduction</a></li>
-                        <li><a href="#Section">Analytics</a></li>
-                        <li><a href="#">Export</a></li>
-                    </ul>
-                    <ul class="nav nav-sidebar">
-                        <li><a href="">Nav item</a></li>
-                        <li><a href="">Nav item again</a></li>
-                        <li><a href="">One more nav</a></li>
-                        <li><a href="">Another nav item</a></li>
-                        <li><a href="">More navigation</a></li>
-                    </ul>
-                    <ul class="nav nav-sidebar">
-                        <li><a href="">Nav item again</a></li>
-                        <li><a href="">One more nav</a></li>
-                        <li><a href="">Another nav item</a></li>
+                        <li><a href="#definitions">Definitions</a></li>
+                        <li><a href="#type">Type</a></li>
+                        <li><a href="#alarm">Alarm</a></li>
+                        <li><a href="#display">Display</a></li>
+                        <li><a href="#enum">Enum</a></li>
+                        <li><a href="#time">Time</a></li>
+                        <li><a href="#vnumber">VNumber</a></li>
+                        <li><a href="#vboolean">VBoolean</a></li>
+                        <li><a href="#venum">VEnum</a></li>
+                        <li><a href="#vstring">VString</a></li>
+                        <li><a href="#vnumberarray">VNumberArray</a></li>
+                        <li><a href="#vbooleanarray">VBooleanArray</a></li>
+                        <li><a href="#venumarray">VEnumArray</a></li>
+                        <li><a href="#vstringarray">VStringArray</a></li>
+                        <li><a href="#vtable">VTable</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -83,45 +84,42 @@
 
                     <div id="contents" class="contents">
 
-                        <div id="introduction" class="anchor">
-                            <h2>Introduction</h2>
+                        <h2 id="introduction" class="anchor">Introduction</h2>
 
-                            <p>This document describes the serialization to JSON of vTypes as provided
-                                by this library. The purpose of the JSON serialization is to interoperate
-                                with different domains, such as web services/sockets and python scripting.
-                            </p>
+                        <p>This document describes the serialization to JSON of vTypes as provided
+                            by this library. The purpose of the JSON serialization is to interoperate
+                            with different domains, such as web services/sockets and python scripting.
+                        </p>
 
-                            <p>Current support is included for the following types:</p>
-                            <ul>
-                                <li>VNumber (VDouble, VFloat, VLong, VInt, VShort, VByte)</li> 
-                                <li>VBoolean</li>
-                                <li>VEnum</li>
-                                <li>VString</li>
-                                <li>VNumberArray (VDoubleArray, VFloatArray, VLongArray, VIntArray, VShortArray, VByteArray)</li> 
-                                <li>VBooleanArray</li>
-                                <li>VEnumArray</li>
-                                <li>VStringArray</li>
-                                <li>VTable</li>
-                            </ul>              
-                            <p>Note that JSON serialization in verbose and not efficient. Therefore
-                                it can be used for data of moderate size and slow update rate.
-                                Hopefully, in the future, BSON will reach a standardization point
-                                and availability, to handle more efficient encoding.</p>
+                        <p>Current support is included for the following types:</p>
+                        <ul>
+                            <li>VNumber (VDouble, VFloat, VLong, VInt, VShort, VByte)</li> 
+                            <li>VBoolean</li>
+                            <li>VEnum</li>
+                            <li>VString</li>
+                            <li>VNumberArray (VDoubleArray, VFloatArray, VLongArray, VIntArray, VShortArray, VByteArray)</li> 
+                            <li>VBooleanArray</li>
+                            <li>VEnumArray</li>
+                            <li>VStringArray</li>
+                            <li>VTable</li>
+                        </ul>              
+                        <p>Note that JSON serialization in verbose and not efficient. Therefore
+                            it can be used for data of moderate size and slow update rate.
+                            Hopefully, in the future, BSON will reach a standardization point
+                            and availability, to handle more efficient encoding.</p>
 
-                            <p>The JSON serialization is broken down into the basic vTypes components:</p>
-                            <ul id="seds_types">
-                                <li>Alarm</li>
-                                <li>Display</li>
-                                <li>Enum</li>
-                                <li>Time</li>
-                            </ul>
-                            <p>The serialization of each element is common across vTypes.</p>
-                            <hr /> 
-                        </div>
+                        <p>The JSON serialization is broken down into the basic vTypes components:</p>
+                        <ul id="seds_types">
+                            <li>Alarm</li>
+                            <li>Display</li>
+                            <li>Enum</li>
+                            <li>Time</li>
+                        </ul>
+                        <p>The serialization of each element is common across vTypes.</p>
+                        <hr /> 
 
-                        <div id = "definitions">
-                            <h2>JSON definitions</h2>
-                            <h3>Type</h3>
+                            <h2 id="definitions" class="anchor">JSON definitions</h2>
+                            <h3 id="type" class="anchor">Type</h3>
                             <p>The purpose of the type field is to signal that a particular
                                 JSON object is the serialization of a vType. It will also contain
                                 all information needed to de-serialize or use the object,
@@ -159,7 +157,7 @@
                             <hr />
 
 
-                            <h3>Alarm</h3>                
+                            <h3 id="alarm" class="anchor">Alarm</h3>                
                             <div>
                                 <p>An Alarm:</p>
                                 <pre>
@@ -198,10 +196,9 @@
     }
                                 </pre>
                                 <hr />
-                            </div>
 
 
-                            <h3>Display</h3>
+                            <h3 id="display" class="anchor">Display</h3>
                             <div>
                                 <p>A Display:</p>
                                 <pre>
@@ -262,7 +259,7 @@
                                 <hr />
                             </div>
 
-                            <h3>Enum</h3>
+                            <h3 id="enum" class="anchor">Enum</h3>
                             <div>
                                 <p>An Enum:</p>
                                 <pre>
@@ -297,7 +294,7 @@
                             </div>
 
                             <!-- Time -->
-                            <h3>Time</h3>                
+                            <h3 id="time" class="anchor">Time</h3>                
                             <div>
                                 <p>A Time:</p>
                                 <pre>
@@ -336,7 +333,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VNumber (VDouble, VFloat, VLong, VInt, VShort, VByte)</h3>                
+                            <h3 id="vnumber" class="anchor">VNumber (VDouble, VFloat, VLong, VInt, VShort, VByte)</h3>                
                             <div>
                                 <p>A scalar numeric value:</p>
                                 <pre>
@@ -403,7 +400,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VBoolean</h3>                
+                            <h3 id="vboolean" class="anchor">VBoolean</h3>                
                             <div>
                                 <p>A scalar boolean value:</p>
                                 <pre>
@@ -459,7 +456,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VEnum</h3>                
+                            <h3 id="venum" class="anchor">VEnum</h3>                
                             <div>
                                 <p>A scalar enumeration value:</p>
                                 <pre>
@@ -523,7 +520,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VString</h3>                
+                            <h3 id="vstring" class="anchor">VString</h3>                
                             <div>
                                 <p>A scalar string value:</p>
                                 <pre>
@@ -577,7 +574,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VNumberArray (VDoubleArray, VFloatArray, VLongArray, VIntArray, VShortArray, VByteArray)</h3>                
+                            <h3 id="vnumberarray" class="anchor">VNumberArray (VDoubleArray, VFloatArray, VLongArray, VIntArray, VShortArray, VByteArray)</h3>                
                             <div>
                                 <p>A numeric array value:</p>
                                 <pre>
@@ -649,7 +646,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VBooleanArray</h3>
+                            <h3 id="vbooleanarray" class="anchor">VBooleanArray</h3>
                             <div>
                                 <p>A boolean array value:</p>
                                 <pre>
@@ -710,7 +707,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VEnumArray</h3>                
+                            <h3 id="venumarray" class="anchor">VEnumArray</h3>                
                             <div>
                                 <p>A enumeration array value:</p>
                                 <pre>
@@ -774,11 +771,11 @@
             ]
         }
     }
-                                </pre>                
+                                </pre>      
                                 <hr />
                             </div>
 
-                            <h3>VStringArray</h3>                
+                            <h3 id="vstringarray" class="anchor">VStringArray</h3>                
                             <div>
                                 <p>A string array value:</p>
                                 <pre>
@@ -836,7 +833,7 @@
                                 <hr />
                             </div>
 
-                            <h3>VTable</h3>                
+                            <h3 id="vtable" class="anchor">VTable</h3>                
                             <div>
                                 <p>A table:</p>
                                 <pre>
