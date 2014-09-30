@@ -90,76 +90,76 @@
                     <hr />
 
 
-                    <div id="contents" class="contents">
-
-                        <h2 id="introduction" class="anchor">Introduction</h2>
-                        <p>WARNING: this is still a draft. The specification is not yet considered finished.
+                    <h2 id="introduction" class="anchor">Introduction</h2>
+                    <p>WARNING: this is still a draft. The specification is not yet considered finished.
                         It will be complete only when a fully tested end-to-end
                         system has proved to work with reasonable performance.</p>
-                        <p>This document specifies the communication protocol used
+                    <p>This document specifies the communication protocol used
                         by the Web Protocol Oriented Distribution Service. The protocol
                         is built on top of web sockets, and it specifies the
                         payload transmitted by the client and the service. All
                         payloads are JSON serialization of messages.</p>
-                        
-                        <h3 id="related_documents" class="anchor">Related documents</h3>
-                        <p>This is a list of related specifications we looked at 
-                            before putting together this document</p>
-                        <ul>
-                            <li><a href="http://tools.ietf.org/html/draft-tamplin-hybi-google-mux-03">Proposed extensions to websockets</a></li>
-                            <li><a href="http://webpda.org/documentation/Specification.html">WebPDA specification</a></li>
-                            <li><a href="http://stomp.github.io/stomp-specification-1.1.html">STOMP specification</a></li>
-                        </ul>
-                        
-                        <hr />
 
-                        <h2 id="security" class="anchor">AuthZ/AuthN</h2>
-                        <p>The plan is to use plain wss:// for authentication. For 
-                            authorization, a configuration file will determine
-                            which channels are authorized based on:</p>
-                        <ul>
-                            <li>Channel name</li>
-                            <li>Client IP address</li>
-                            <li>Username (as defined by wss authentication)</li>
-                            <li>Role (as defined by web container)</li>
-                            <li>Group (as defined by PAM in case of UNIX authentication)</li>
-                        </ul>
-                        
-                        <hr />
+                    <h3 id="related_documents" class="anchor">Related documents</h3>
+                    <p>This is a list of related specifications we looked at 
+                        before putting together this document</p>
+                    <ul>
+                        <li><a href="http://tools.ietf.org/html/draft-tamplin-hybi-google-mux-03">Proposed extensions to websockets</a></li>
+                        <li><a href="http://webpda.org/documentation/Specification.html">WebPDA specification</a></li>
+                        <li><a href="http://stomp.github.io/stomp-specification-1.1.html">STOMP specification</a></li>
+                    </ul>
 
-                        <h2 id="connection" class="anchor">Connection</h2>
-                        <h3 id="connect" class="anchor">Connect</h3>
-                        <p>The connection/disconnection to the web sockets corresponds to the initialization/recycling of the pvmanager session. Session is started by connecting to the URL:</p>
-                        <pre>ws://[server]/webpods/socket?[connPar1]=[value1]&amp;...</pre>
-                        <p>Parameters to the connection are encoded in http request parameters. Valid connection parameters:</p>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Value</td>
-                                    <td>Default</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>updateRate</td>
-                                    <td>number in ms</td>
-                                    <td>1000 ms</td>
-                                    <td>Max rate to send updates to the client for each pv</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <hr />
 
-                        <h3 id="disconnect" class="anchor">Disconnect</h3>
-                        <p>On WS disconnection, the session is closed and all open pvs are automatically closed.</p>
-                        <br/>
+                    <h2 id="security" class="anchor">AuthZ/AuthN</h2>
+                    <p>The plan is to use plain wss:// for authentication. For 
+                        authorization, a configuration file will determine
+                        which channels are authorized based on:</p>
+                    <ul>
+                        <li>Channel name</li>
+                        <li>Client IP address</li>
+                        <li>Username (as defined by wss authentication)</li>
+                        <li>Role (as defined by web container)</li>
+                        <li>Group (as defined by PAM in case of UNIX authentication)</li>
+                    </ul>
 
-                        <h2 id="messages" class="anchor">Messages</h2>
-                        <p>All messages are JSON objects, passed as WS text messages.</p>
-                        <h3 id="subscribe" class="anchor">Subscribe</h3>
-                        <p>Subscribe is a WS text message sent by the client to open a pv.</p>
-                        <pre>{
+                    <hr />
+
+                    <h2 id="connection" class="anchor">Connection</h2>
+                    <h3 id="connect" class="anchor">Connect</h3>
+                    <p>The connection/disconnection to the web sockets corresponds to the initialization/recycling of the pvmanager session. Session is started by connecting to the URL:</p>
+                    <pre>ws://[server]/webpods/socket?[connPar1]=[value1]&amp;...</pre>
+                    <p>Parameters to the connection are encoded in http request parameters. Valid connection parameters:</p>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Value</td>
+                                <td>Default</td>
+                                <td>Description</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>updateRate</td>
+                                <td>number in ms</td>
+                                <td>1000 ms</td>
+                                <td>Max rate to send updates to the client for each pv</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 id="disconnect" class="anchor">Disconnect</h3>
+                    <p>On WS disconnection, the session is closed and all open pvs are automatically closed.</p>
+                    <br/>
+
+                    <hr />
+
+                    <h2 id="messages" class="anchor">Messages</h2>
+                    <p>All messages are JSON objects, passed as WS text messages.</p>
+                    <h3 id="subscribe" class="anchor">Subscribe</h3>
+                    <p>Subscribe is a WS text message sent by the client to open a pv.</p>
+                    <pre>{
     “message” : “subscribe”,
     “id” : [unique-id-integer],
     “pv” : [pv-formula-string],
@@ -167,26 +167,26 @@
     (optional) “maxRate” : [max-rate-ms-integer]
     (optional) “readOnly” : [boolean]
 }</pre>
-                        <p>The id must be unique, and will be used in responses
-                            to identify the subscription. If the same id is reused,
-                            an error message will be sent to the same id. Type,
-                            maxRate and readOnly are optional. readOnly is true
-                            by default. default type is “anything”, whatever the
-                            pv is. Default maxRate is the one specified at connection.</p>
-                        
-                        <p>All values (instead of latest value only) is tentatively
-                            a formula function (need to double check how to do it).</p>
+                    <p>The id must be unique, and will be used in responses
+                        to identify the subscription. If the same id is reused,
+                        an error message will be sent to the same id. Type,
+                        maxRate and readOnly are optional. readOnly is true
+                        by default. default type is “anything”, whatever the
+                        pv is. Default maxRate is the one specified at connection.</p>
 
-                        <h3 id="unsubscribe" class="anchor">Unsubscribe</h3>
-                        <p>Unsubcribe is a WS text message sent by the client to close a pv.</p>
-                        <pre>{
+                    <p>All values (instead of latest value only) is tentatively
+                        a formula function (need to double check how to do it).</p>
+
+                    <h3 id="unsubscribe" class="anchor">Unsubscribe</h3>
+                    <p>Unsubcribe is a WS text message sent by the client to close a pv.</p>
+                    <pre>{
     “message” : “unsubscribe”,
     “id” : [unique-id-integer],
 }</pre>
 
-                        <h3 id="event" class="anchor">Event</h3>
-                        <p>Event is a WS text message sent by the server to notify of a pv change.</p>
-                        <pre>{
+                    <h3 id="event" class="anchor">Event</h3>
+                    <p>Event is a WS text message sent by the server to notify of a pv change.</p>
+                    <pre>{
     “message” : “event”,
     “id” : [unique-id-integer],
     “type” : “connection”,
@@ -212,37 +212,33 @@
     “successful” : [boolean],
     “error” : [possible-error-string]
 }</pre>
-                        <p>Future: combine the events into one message?
-                        </p>
+                    <p>Future: combine the events into one message?
+                    </p>
 
-                        <h3 id="write" class="anchor">Write</h3>
-                        <p>Write is a WS text message sent by the client to modify
-                            a value of a pv.</p>
+                    <h3 id="write" class="anchor">Write</h3>
+                    <p>Write is a WS text message sent by the client to modify
+                        a value of a pv.</p>
 
-                        <pre>{
+                    <pre>{
     “message” : “write”,
     “id” : [unique-id-integer],
     “value” : [json-value]
 }</pre>
 
-                        <h3 id="pause" class="anchor">Pause</h3>
-                        <p>Write is a WS text message sent by the client to stop
-                            notification for a pv.</p>
-                        <pre>{
+                    <h3 id="pause" class="anchor">Pause</h3>
+                    <p>Write is a WS text message sent by the client to stop
+                        notification for a pv.</p>
+                    <pre>{
     “message” : “pause”,
     “id” : [unique-id-integer],
 }</pre>
-                        <h3 id="resume" class="anchor">Resume</h3>
-                        <p>Write is a WS text message sent by the client to resume
-                            notification for a pv.</p>
-                        <pre>{
+                    <h3 id="resume" class="anchor">Resume</h3>
+                    <p>Write is a WS text message sent by the client to resume
+                        notification for a pv.</p>
+                    <pre>{
     “message” : “resume”,
     “id” : [unique-id-integer],
 }</pre>
-
-
-
-                    </div>
 
                 </div>
             </div>
