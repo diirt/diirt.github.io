@@ -12,6 +12,10 @@
     position: fixed;
 }
 
+.sidebar-container {
+    background-color: #ADB558
+}
+
 /* sidebar */
 .bs-docs-sidebar {
     padding-left: 20px;
@@ -21,7 +25,7 @@
 
 /* all links */
 .bs-docs-sidebar .nav>li>a {
-    color: #5f994f;
+    color: #542C20;
     border-left: 2px solid transparent;
     padding: 4px 20px;
     font-size: 13px;
@@ -40,10 +44,10 @@
 .bs-docs-sidebar .nav>.active>a, 
 .bs-docs-sidebar .nav>li>a:hover, 
 .bs-docs-sidebar .nav>li>a:focus {
-    color: #542c20;                 
+    color: #FFFFFE;                 
     text-decoration: none;          
     background-color: transparent;  
-    border-left-color: #542c20;
+    border-left-color: #FFFFFE;
 }
 /* all active links */
 .bs-docs-sidebar .nav>.active>a, 
