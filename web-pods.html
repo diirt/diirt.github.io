@@ -144,13 +144,13 @@
                                 <td>updateRate</td>
                                 <td>number in ms</td>
                                 <td>1000 ms</td>
-                                <td>Max rate to send updates to the client for each pv</td>
+                                <td>Max rate to send updates to the client for each channel</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <h3 id="disconnect" class="anchor">Disconnect</h3>
-                    <p>On WS disconnection, the session is closed and all open pvs are automatically closed.</p>
+                    <p>On WS disconnection, the session is closed and all open channels are automatically closed.</p>
                     <br/>
 
                     <hr />
@@ -158,11 +158,11 @@
                     <h2 id="messages" class="anchor">Messages</h2>
                     <p>All messages are JSON objects, passed as WS text messages.</p>
                     <h3 id="subscribe" class="anchor">Subscribe</h3>
-                    <p>Subscribe is a WS text message sent by the client to open a pv.</p>
+                    <p>Subscribe is a WS text message sent by the client to open a channel.</p>
                     <pre>{
     “message” : “subscribe”,
     “id” : [unique-id-integer],
-    “pv” : [pv-formula-string],
+    “channel” : [channel-formula-string],
     (optional) “type” : [expected-value-type-string],
     (optional) “maxRate” : [max-rate-ms-integer]
     (optional) “readOnly” : [boolean]
@@ -172,20 +172,20 @@
                         an error message will be sent to the same id. Type,
                         maxRate and readOnly are optional. readOnly is true
                         by default. default type is “anything”, whatever the
-                        pv is. Default maxRate is the one specified at connection.</p>
+                        channel is. Default maxRate is the one specified at connection.</p>
 
                     <p>All values (instead of latest value only) is tentatively
                         a formula function (need to double check how to do it).</p>
 
                     <h3 id="unsubscribe" class="anchor">Unsubscribe</h3>
-                    <p>Unsubcribe is a WS text message sent by the client to close a pv.</p>
+                    <p>Unsubcribe is a WS text message sent by the client to close a channel.</p>
                     <pre>{
     “message” : “unsubscribe”,
     “id” : [unique-id-integer],
 }</pre>
 
                     <h3 id="event" class="anchor">Event</h3>
-                    <p>Event is a WS text message sent by the server to notify of a pv change.</p>
+                    <p>Event is a WS text message sent by the server to notify of a channel change.</p>
                     <pre>{
     “message” : “event”,
     “id” : [unique-id-integer],
@@ -217,7 +217,7 @@
 
                     <h3 id="write" class="anchor">Write</h3>
                     <p>Write is a WS text message sent by the client to modify
-                        a value of a pv.</p>
+                        a value of a channel.</p>
 
                     <pre>{
     “message” : “write”,
@@ -227,14 +227,14 @@
 
                     <h3 id="pause" class="anchor">Pause</h3>
                     <p>Write is a WS text message sent by the client to stop
-                        notification for a pv.</p>
+                        notification for a channel.</p>
                     <pre>{
     “message” : “pause”,
     “id” : [unique-id-integer],
 }</pre>
                     <h3 id="resume" class="anchor">Resume</h3>
                     <p>Write is a WS text message sent by the client to resume
-                        notification for a pv.</p>
+                        notification for a channel.</p>
                     <pre>{
     “message” : “resume”,
     “id” : [unique-id-integer],
