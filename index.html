@@ -56,8 +56,8 @@
                 <h1>diirt: Data Integration In Real-Time</h1>
                 <p>A Java framework to retrieve, aggregate and process data in real time.</p>
                 <!--<p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>-->
-                <h2>Download: <a class="btn btn-primary" href="https://openepics.ci.cloudbees.com/job/CS-Studio%20-%20diirt%20dev%20version/" role="button">Latest CS-Studio integration build &raquo;</a>
-                <a class="btn btn-primary" href="http://search.maven.org/#search|ga|1|g%3A%22org.epics%22" role="button">Released libraries from maven central &raquo;</a></h2>
+                <!--<h2>Download: <a class="btn btn-primary" href="https://openepics.ci.cloudbees.com/job/CS-Studio%20-%20diirt%20dev%20version/" role="button">Latest CS-Studio integration build &raquo;</a>
+                <a class="btn btn-primary" href="http://search.maven.org/#search|ga|1|g%3A%22org.epics%22" role="button">Released libraries from maven central &raquo;</a></h2>-->
             </div>
         </div>
         
@@ -69,23 +69,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h2>epics-util</h2>
-                    <p>Provides a set of utilities as a stop-gap solution for things that one day (hopefully) will be provided by the core Java libraries. </p>
-                    <p><a class="btn btn-primary" href="http://util.diirt.org" role="button">Go to project &raquo;</a></p>
+                    <h2>Diirt libraries</h2>
+                    <p>Use the libraries (pvmanager, graphene, ...) directly to integrate diirt in your application. </p>
+                    <p><a class="btn btn-primary" href="https://github.com/diirt/diirt/wiki/Diirt-Users" role="button">User documentation &raquo;</a>
+                    <a class="btn btn-primary" href="http://diirt.org/maven-site/apidocs/" role="button">Javadocs &raquo;</a>
+                    </p>
                 </div>
                 <div class="col-md-4">
-                    <h2>pvmanager</h2>
-                    <p>The engine that provides connection to publish/subscribe datasources (EPICS v3/v4, filesystem) and command/response
-                        services (EPICS v4, databases through JDBC, web services, command line). It normalizes
-                        the data into the vType system. It supports processing on a managed thread
-                        pool. It decouples rates and notifies the client at a requested rate, with objects that are
-                        thread-safe.. </p>
-                    <p><a class="btn btn-primary" href="http://pvmanager.diirt.org" role="button">Go to project &raquo;</a></p>
+                    <h2>WebPODS</h2>
+                    <p>Use web standards (WebSockets, JSON, HTML, CSS) to serve and display data aggregated 
+                        by diirt.</p>
+                    <p><a class="btn btn-primary" href="https://github.com/diirt/diirt/wiki/WebPODS-installation" role="button">Install WebPODS &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
-                    <h2>graphene</h2>
-                    <p>Provides graph rendering suitable for large scientific data in real-time.</p>
-                    <p><a class="btn btn-primary" href="http://graphene.diirt.org" role="button">Go to project &raquo;</a></p>
+                    <h2>CS-Studio Integration</h2>
+                    <p>We are still working on resolving the integration of diirt 3.x with CS-Studio.</p>
                 </div>
             </div>
 
